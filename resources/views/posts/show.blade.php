@@ -22,6 +22,8 @@
         </div>
         <div class="footer">
             <a href="/">戻る</a>
+            <a href="">{{ $post->category->name }}</a>
+            <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
         </div>
     </body>
 </html>
