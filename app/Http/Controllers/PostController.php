@@ -4,24 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Http\Requests\PostRequest; // useする
+use App\Category;
 
 class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return view('posts/index')->with(['posts' => $post->getPaginate()]);
+        return view('posts/index')->with(['posts' => $post->getPaginateByLimit()]);
     }
 
     public function show(Post $post)
     {
         return view('posts/show')->with(['post' => $post]);
     }
-
-    public function create()
-    {
-        return view('posts/create');
-    }
-
+   
+public function create(Category $category)
+{
+    return view('posts/create')->with(['categories' => $category->get()]);;
+}
     public function store(Post $post, PostRequest $request) // 引数をRequest->PostRequestにする
     {
         $input = $request['post'];
@@ -44,4 +44,5 @@ public function delete(Post $post)
     $post->delete();
     return redirect('/');
 }
+
 }
